@@ -77,20 +77,8 @@ void AIProcess_Update3DModel_Hook(AIProcess* this__, Actor* actor)
 	REL_CallOriginal(this__, actor);
 }
 
-RELUNIQUE(ActorEquipManager, Unk_38898)
-void Unk_38898_Hook(ActorEquipManager* this__, Actor* actor, TESBoundObject* object, BSTArray<SpellItem*>* spellItems, const BGSEquipSlot* slot)
-{
-	TESForm* spellItemsOwner = reinterpret_cast<TESForm*>(spellItems - 0x98);
-
-	REL_CallOriginal(this__, actor, object, spellItems, slot);
-}
-
 void Hooks::Init()
 {
-
-	REL_WriteUniqueCall(34229, 0xDE, Unk_38898_Hook);
-	REL_WriteUniqueCall(34233, 0xBE, Unk_38898_Hook);
-
 
 	// EQUIPPING
 

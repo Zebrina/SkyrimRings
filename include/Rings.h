@@ -21,7 +21,7 @@ public:
 	int GetRingSlotIndex(const RE::BGSEquipSlot* slot) const;
 	const RE::BGSEquipSlot* GetRingSlot(int index) const;
 
-	int GetNumEquippedRings(RE::Actor* actor) const;
+	size_t GetNumEquippedRings(RE::Actor* actor) const;
 	RE::TESObjectARMO* GetEquippedRing(RE::Actor* actor, int index) const;
 	void EquipRing(RE::Actor* actor, RE::TESForm* ring, int index, bool preventRemoval, bool silent) const;
 	void UnequipRingSlot(RE::Actor* actor, int index, bool silent) const;
@@ -69,7 +69,6 @@ private:
 	size_t maxRingSlots{ 0 };
 	RE::BGSEquipSlot* ringSlots[MaxAllowedRingSlots]{ nullptr };
 	const RE::BGSEquipSlot* leftHand{ nullptr };
-	mutable const RE::BGSEquipSlot* forcedRingSlot{ nullptr };
 
 	static RE::BSSimpleList<RE::ExtraDataList*>* GetRingExtraLists(RE::Actor* actor, RE::TESForm* ring);
 

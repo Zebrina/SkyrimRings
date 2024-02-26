@@ -6,7 +6,7 @@ using namespace RE;
 
 int GetNumEquippedRings(StaticFunctionTag*, Actor* actor)
 {
-	return Rings::GetSingleton()->GetNumEquippedRings(actor);
+	return (int)Rings::GetSingleton()->GetNumEquippedRings(actor);
 }
 TESObjectARMO* GetEquippedRing(StaticFunctionTag*, Actor* actor, int index)
 {

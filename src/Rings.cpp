@@ -100,7 +100,7 @@ const BGSEquipSlot* Rings::GetRingSlot(int index) const
 	return ringSlots[index];
 }
 
-int Rings::GetNumEquippedRings(Actor* actor) const
+size_t Rings::GetNumEquippedRings(Actor* actor) const
 {
 	if (!actor || !actor->currentProcess)
 	{
@@ -143,15 +143,10 @@ void Rings::EquipRing(Actor* actor, TESForm* ring, int index, bool preventRemova
 		return;
 	}
 
-	// This is the Actor.EquipItem Papyrus function.
-	// The first two parameters don't seem to be used so it should be safe to use it like this.
-	static REL::Relocation<void(*)(BSScript::IVirtualMachine*, VMHandle, Actor*, TESForm*, bool, bool)> PapyrusEquipItem{ REL::ID(54661).address() };
+	auto extraLists = GetRingExtraLists(actor, ring);
+	ExtraDataList* extraData = (extraLists && !extraLists->empty()) ? extraLists->front() : nullptr;
 
-	forcedRingSlot = GetRingSlot(index);
-
-	PapyrusEquipItem(nullptr, 0, actor, ring, preventRemoval, silent);
-
-	forcedRingSlot = nullptr;
+	ActorEquipManager::GetSingleton()->EquipObject(actor, static_cast<TESBoundObject*>(ring), extraData, 1, GetRingSlot(index), true, preventRemoval, !silent);
 }
 void Rings::UnequipRingSlot(Actor* actor, int index, bool silent) const
 {
@@ -166,11 +161,10 @@ void Rings::UnequipRingSlot(Actor* actor, int index, bool silent) const
 		return;
 	}
 
-	// This is the Actor.UnequipItem Papyrus function.
-	// The first two parameters don't seem to be used so it should be safe to use it like this.
-	static REL::Relocation<void(*)(BSScript::IVirtualMachine*, VMHandle, Actor*, TESForm*, bool, bool)> PapyrusUnequipItem{ REL::ID(54774).address() };
+	auto extraLists = GetRingExtraLists(actor, equippedRing);
+	ExtraDataList* extraData = (extraLists && !extraLists->empty()) ? extraLists->front() : nullptr;
 
-	PapyrusUnequipItem(nullptr, 0, actor, equippedRing, false, silent);
+	ActorEquipManager::GetSingleton()->UnequipObject(actor, static_cast<TESBoundObject*>(equippedRing), extraData, 1, GetRingSlot(index), true, false, !silent);
 }
 
 const BGSEquipSlot* Rings::GetNextRingSlot(Actor* actor, const BGSEquipSlot* slot) const
@@ -178,11 +172,6 @@ const BGSEquipSlot* Rings::GetNextRingSlot(Actor* actor, const BGSEquipSlot* slo
 	if (GetRingSlotIndex(slot) >= 0)
 	{
 		return slot;
-	}
-
-	if (forcedRingSlot)
-	{
-		return forcedRingSlot;
 	}
 
 	BGSEquipSlot* nextRingSlot = ringSlots[0];
@@ -202,7 +191,7 @@ const BGSEquipSlot* Rings::GetNextRingSlot(Actor* actor, const BGSEquipSlot* slo
 		if (occupied == 0xFF)
 		{
 			// All slots are occupied. Find the last one that is not locked.
-			for (int i = numRingSlots - 1; i >= 0; i--)
+			for (int i = (int)numRingSlots - 1; i >= 0; i--)
 			{
 				TESObjectARMO* equippedRing = GetEquippedRing(actor, i);
 				if (equippedRing)
@@ -231,7 +220,7 @@ const BGSEquipSlot* Rings::GetNextRingSlot(Actor* actor, const BGSEquipSlot* slo
 		}
 
 		nextRingSlot = ringSlots[numRingSlots - 1];
-		for (int i = 0, n = numRingSlots - 1; i < n; i++)
+		for (int i = 0, n = (int)numRingSlots - 1; i < n; i++)
 		{
 			if ((occupied & (1 << i)) == 0x0)
 			{
@@ -358,7 +347,7 @@ void Rings::DetachAllRingModels(Actor* actor, bool firstPerson) const
 	}
 }
 
-BSSimpleList<ExtraDataList*>* Rings::GetRingExtraLists(Actor * actor, TESForm * ring)
+BSSimpleList<ExtraDataList*>* Rings::GetRingExtraLists(Actor* actor, TESForm* ring)
 {
 	ExtraContainerChanges* containerChanges = static_cast<ExtraContainerChanges*>(actor->extraList.GetByType(ExtraDataType::kContainerChanges));
 	if (!containerChanges)
