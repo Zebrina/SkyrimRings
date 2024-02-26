@@ -144,12 +144,12 @@ void Rings::EquipRing(Actor* actor, TESForm* ring, int index, bool preventRemova
 	}
 
 	// This is the Actor.EquipItem Papyrus function.
-	// The first two parameters don't seem to be used.
-	static REL::Relocation<void(*)(void*, void*, Actor*, TESForm*, bool, bool)> PapyrusEquipItem{ REL::ID(54661).address() };
+	// The first two parameters don't seem to be used so it should be safe to use it like this.
+	static REL::Relocation<void(*)(BSScript::IVirtualMachine*, VMHandle, Actor*, TESForm*, bool, bool)> PapyrusEquipItem{ REL::ID(54661).address() };
 
 	forcedRingSlot = GetRingSlot(index);
 
-	PapyrusEquipItem(nullptr, nullptr, actor, ring, preventRemoval, silent);
+	PapyrusEquipItem(nullptr, 0, actor, ring, preventRemoval, silent);
 
 	forcedRingSlot = nullptr;
 }
@@ -167,10 +167,10 @@ void Rings::UnequipRingSlot(Actor* actor, int index, bool silent) const
 	}
 
 	// This is the Actor.UnequipItem Papyrus function.
-	// The first two parameters don't seem to be used.
-	static REL::Relocation<void(*)(void*, void*, Actor*, TESForm*, bool, bool)> PapyrusUnequipItem{ REL::ID(54774).address() };
+	// The first two parameters don't seem to be used so it should be safe to use it like this.
+	static REL::Relocation<void(*)(BSScript::IVirtualMachine*, VMHandle, Actor*, TESForm*, bool, bool)> PapyrusUnequipItem{ REL::ID(54774).address() };
 
-	PapyrusUnequipItem(nullptr, nullptr, actor, equippedRing, false, silent);
+	PapyrusUnequipItem(nullptr, 0, actor, equippedRing, false, silent);
 }
 
 const BGSEquipSlot* Rings::GetNextRingSlot(Actor* actor, const BGSEquipSlot* slot) const
