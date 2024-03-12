@@ -67,8 +67,6 @@ void Rings::UpdateData(TESDataHandler* data)
 			armor->armorAddons.clear();
 		}
 	}
-
-	leftHand = static_cast<BGSEquipSlot*>(TESForm::LookupByID(0x013F43));
 }
 
 size_t Rings::GetNumRingSlots() const

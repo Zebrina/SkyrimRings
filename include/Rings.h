@@ -68,7 +68,6 @@ private:
 	size_t numRingSlots{ 0 };
 	size_t maxRingSlots{ 0 };
 	RE::BGSEquipSlot* ringSlots[MaxAllowedRingSlots]{ nullptr };
-	const RE::BGSEquipSlot* leftHand{ nullptr };
 
 	static RE::BSSimpleList<RE::ExtraDataList*>* GetRingExtraLists(RE::Actor* actor, RE::TESForm* ring);
 

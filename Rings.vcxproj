@@ -110,9 +110,9 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>SKYRIM_SUPPORT_AE;BOOST_STL_INTERFACES_DISABLE_CONCEPTS;WINVER=0x0601;_WIN32_WINNT=0x0601;SPDLOG_COMPILED_LIB;SPDLOG_FMT_EXTERNAL;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SILENCE_CXX23_ALIGNED_STORAGE_DEPRECATION_WARNING;SKYRIM_SUPPORT_AE;BOOST_STL_INTERFACES_DISABLE_CONCEPTS;WINVER=0x0601;_WIN32_WINNT=0x0601;SPDLOG_COMPILED_LIB;SPDLOG_FMT_EXTERNAL;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>include;..\CommonLibSSE\include;..\CommonLibSSE\build\vcpkg_installed\x64-windows-static-md\include;external\tomlplusplus\include\toml++;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -135,9 +135,9 @@ xcopy "$(TargetDir)$(TargetName).pdb" "D:\Games\Tools\ModOrganizer2\Games\Skyrim
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>SKYRIM_SUPPORT_AE;NDEBUG;BOOST_STL_INTERFACES_DISABLE_CONCEPTS;WINVER=0x0601;_WIN32_WINNT=0x0601;SPDLOG_COMPILED_LIB;SPDLOG_FMT_EXTERNAL;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_SILENCE_CXX23_ALIGNED_STORAGE_DEPRECATION_WARNING;SKYRIM_SUPPORT_AE;NDEBUG;BOOST_STL_INTERFACES_DISABLE_CONCEPTS;WINVER=0x0601;_WIN32_WINNT=0x0601;SPDLOG_COMPILED_LIB;SPDLOG_FMT_EXTERNAL;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>include;..\CommonLibSSE\include;..\CommonLibSSE\build\vcpkg_installed\x64-windows-static-md\include;external\tomlplusplus\include\toml++;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>Use</PrecompiledHeader>

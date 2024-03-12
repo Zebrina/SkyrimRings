@@ -5,8 +5,6 @@
 
 using namespace RE;
 
-BGSEquipSlot* Hooks::LeftHand;
-
 RELUNIQUE(ActorEquipManager, EquipObject)
 void ActorEquipManager_EquipObject_Hook(ActorEquipManager* this__, Actor* actor, TESBoundObject* object, ExtraDataList* extraData, uint32_t count, const BGSEquipSlot* slot, bool queueEquip, bool forceEquip, bool playSounds, bool applyNow)
 {
