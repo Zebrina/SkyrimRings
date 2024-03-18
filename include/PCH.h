@@ -27,3 +27,5 @@ namespace util
 #include "Plugin.h"
 
 #include "Config.h"
+
+#define BETTER_SAFE_THAN_SORRY

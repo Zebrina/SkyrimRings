@@ -173,8 +173,8 @@ del "$(TargetDir)$(TargetName).pdb"</Command>
     <ClInclude Include="include\Papyrus.h" />
     <ClInclude Include="include\PCH.h" />
     <ClInclude Include="include\Plugin.h" />
+    <ClInclude Include="include\RELX.h" />
     <ClInclude Include="include\Rings.h" />
-    <ClInclude Include="include\UniqueFunctionHook.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonLibSSE\build\CommonLibSSE.vcxproj">

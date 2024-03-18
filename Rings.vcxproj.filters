@@ -53,7 +53,7 @@
     <ClInclude Include="include\Config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\UniqueFunctionHook.h">
+    <ClInclude Include="include\RELX.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
