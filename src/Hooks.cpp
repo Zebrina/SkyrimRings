@@ -6,7 +6,7 @@
 using namespace RE;
 
 DefineUniqueFunctionHook(Rings, decltype(&ActorEquipManager::EquipObject))
-void ActorEquipManager_EquipObject_Hook(ActorEquipManager* this__, Actor* actor, TESBoundObject* object, ExtraDataList* extraData, uint32_t count, const BGSEquipSlot* slot, bool queueEquip, bool forceEquip, bool playSounds, bool applyNow)
+static void ActorEquipManager_EquipObject_Hook(ActorEquipManager* this__, Actor* actor, TESBoundObject* object, ExtraDataList* extraData, uint32_t count, const BGSEquipSlot* slot, bool queueEquip, bool forceEquip, bool playSounds, bool applyNow)
 {
 #ifndef NDEBUG
 	if (!(((ID == 19692 && Offset == 0xFF)) ||
@@ -29,7 +29,7 @@ void ActorEquipManager_EquipObject_Hook(ActorEquipManager* this__, Actor* actor,
 }
 
 DefineUniqueFunctionHook(Rings, decltype(&ActorEquipManager::UnequipObject))
-bool ActorEquipManager_UnequipObject_Hook(ActorEquipManager* this__, Actor* actor, TESBoundObject* object, ExtraDataList* extraData, uint32_t count, const BGSEquipSlot* slot, bool queueEquip, bool forceEquip, bool playSounds, bool applyNow, const BGSEquipSlot* slotToReplace)
+static bool ActorEquipManager_UnequipObject_Hook(ActorEquipManager* this__, Actor* actor, TESBoundObject* object, ExtraDataList* extraData, uint32_t count, const BGSEquipSlot* slot, bool queueEquip, bool forceEquip, bool playSounds, bool applyNow, const BGSEquipSlot* slotToReplace)
 {
 #ifndef NDEBUG
 	if (!(((ID == 37975 && Offset == 0x189)) ||
@@ -60,7 +60,7 @@ bool ActorEquipManager_UnequipObject_Hook(ActorEquipManager* this__, Actor* acto
 }
 
 DefineUniqueFunctionHook(Rings, decltype(&AIProcess::Update3DModel))
-void AIProcess_Update3DModel_Hook(AIProcess* this__, Actor* actor)
+static void AIProcess_Update3DModel_Hook(AIProcess* this__, Actor* actor)
 {
 	if (this__->middleHigh && this__->middleHigh->update3DModel.all(RESET_3D_FLAGS::kModel))
 	{
